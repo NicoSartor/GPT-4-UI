@@ -5,6 +5,6 @@ This UI was created by GPT-4, I'll be improving it overtime as I have time.
 
 ## To Run:
 
-Set your REACT_APP_OPENAI_API_KEY='your openAI API key'
-npm install
+Set your REACT_APP_OPENAI_API_KEY='your openAI API key'  
+npm install  
 npm start
