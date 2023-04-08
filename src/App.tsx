@@ -1,26 +1,41 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { useState } from 'react';
 import './App.css';
+import MessageForm from './components/MessageForm';
+import MessageList from './components/MessageList';
+import PrefixSuffixForm from './components/PrefixSuffixForm';
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+	const [messages, setMessages] = useState<string[]>([]);
+	const [prefix, setPrefix] = useState('');
+	const [suffix, setSuffix] = useState('');
+
+	const handleMessageSubmit = (message: string) => {
+		setMessages((prevMessages) => [...prevMessages, message]);
+	};
+
+	const handlePrefixSuffixChange = (
+		type: 'prefix' | 'suffix',
+		value: string
+	) => {
+		if (type === 'prefix') {
+			setPrefix(value);
+		} else {
+			setSuffix(value);
+		}
+	};
+
+	return (
+		<div className='App'>
+			<h1>GPT-4 Interface</h1>
+			<MessageForm
+				onSubmit={handleMessageSubmit}
+				prefix={prefix}
+				suffix={suffix}
+			/>
+			<MessageList messages={messages} />
+			<PrefixSuffixForm onPrefixSuffixChange={handlePrefixSuffixChange} />
+		</div>
+	);
 }
 
 export default App;
